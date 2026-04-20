@@ -383,14 +383,6 @@ body{background:var(--cream);font-family:'Geist',sans-serif;font-size:16px;line-
 .btn-copy:hover{background:var(--gold2)}
 .btn-close-modal{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:0.5rem 1.25rem;border-radius:8px;font-family:'Geist',sans-serif;font-weight:600;font-size:0.8rem;cursor:pointer}
 </style>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S55D1J1DDZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag("js", new Date());
-  gtag("config", "G-S55D1J1DDZ");
-</script>
 </head>
 <body>
 
@@ -696,7 +688,7 @@ function goStep3() {
   document.getElementById('progressFill').style.width = '100%';
 }
 
-function generateChatbot() {
+async function generateChatbot() {
   bizData.ownerName = document.getElementById('ownerName').value.trim();
   bizData.special = document.getElementById('bizSpecial').value.trim();
   const selectedPersonality = document.querySelector('input[name="personality"]:checked');
@@ -710,11 +702,35 @@ function generateChatbot() {
       document.getElementById(id).classList.add('done');
     }, (i + 1) * 800);
   });
+
+  // Submit to Railway backend
+  try {
+    await fetch('https://staytim-production.up.railway.app/onboarding', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        business_name: bizData.name || '',
+        owner_name: bizData.ownerName || '',
+        email: bizData.email || '',
+        business_type: bizData.type || 'salon',
+        services: bizData.services || '',
+        prices: bizData.prices || '',
+        hours: bizData.hours || '',
+        location: bizData.address || bizData.city || '',
+        personality: bizData.personality || 'friendly',
+        special: bizData.special || '',
+        phone: bizData.phone || ''
+      })
+    });
+    console.log('Signup submitted!');
+  } catch(e) {
+    console.log('Submission error:', e);
+  }
+
   setTimeout(() => {
     setupDemo();
     document.getElementById('page2').classList.remove('active');
     document.getElementById('page3').classList.add('active');
-    // Save to localStorage for thank you page
     localStorage.setItem('staytim_biz', bizData.name);
     setTimeout(() => { toggleChat(); launchConfetti(); }, 800);
   }, 4200);
