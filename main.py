@@ -1,4 +1,7 @@
 from fastapi import FastAPI, Request
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -15,6 +18,9 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
 TWILIO_WHATSAPP_NUMBER = os.getenv("TWILIO_WHATSAPP_NUMBER")
+
+ZOHO_EMAIL = os.getenv("ZOHO_EMAIL")
+ZOHO_PASSWORD = os.getenv("ZOHO_PASSWORD")
 
 if ANTHROPIC_API_KEY:
     print(f"✅ Anthropic API Key loaded: {ANTHROPIC_API_KEY[:12]}...")
