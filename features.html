@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features — Staytim</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080818'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' font-weight='700' fill='%23c9a96e'>S</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-y:scroll;scroll-behavior:smooth}
+:root{--bg:#0d0d0d;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--gold:#c9a96e;--gold2:#e2c48a;--text:#eeeae0;--text2:#8a8680;--text3:#4a4844;--green:#4ade80;--radius:10px;}
+body{background:#0d0d0d;color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:9997;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+nav{transition:background 0.3s;background:transparent}nav.scrolled{background:rgba(13,13,13,0.85);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);letter-spacing:-0.03em;text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#08080a;padding:0.5rem 1.25rem;border-radius:7px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.82rem;text-decoration:none}
+.nav-back{color:var(--text2);text-decoration:none;font-size:0.85rem;transition:color 0.2s}
+.nav-back:hover{color:var(--text)}
+
+.hero{padding:8rem 1.5rem 4rem;text-align:center;max-width:700px;margin:0 auto;background:transparent}
+.hero-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1rem}
+h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-0.04em;line-height:1.08;margin-bottom:1.25rem}
+h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:1rem;color:var(--text2);font-weight:300;line-height:1.8;max-width:500px;margin:0 auto 2.5rem}
+.btn-gold{background:var(--gold);color:#08080a;padding:0.875rem 2rem;border-radius:8px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.9rem;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-gold:hover{background:var(--gold2)}
+
+.section{padding:5rem 1.5rem;border-top:1px solid rgba(255,255,255,0.07);background:transparent}
+.section-inner{max-width:900px;margin:0 auto}
+.section-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:0.875rem}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:1rem;line-height:1.2}
+.section-desc{font-size:0.95rem;color:var(--text2);font-weight:300;line-height:1.8;max-width:560px;margin-bottom:3rem}
+
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.feature-card{background:rgba(0,0,0,0.4);backdrop-filter:blur(20px);padding:2rem;transition:background 0.2s;border:1px solid rgba(255,255,255,0.07)}
+.feature-card:hover{background:rgba(0,0,0,0.55)}
+.feature-num{font-size:0.62rem;font-weight:700;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.25rem}
+.feature-icon{width:42px;height:42px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;transition:border-color 0.3s}
+.feature-card:hover .feature-icon{border-color:rgba(201,169,110,0.3)}
+.feature-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;letter-spacing:-0.02em}
+.feature-desc{font-size:0.85rem;color:var(--text2);line-height:1.7;font-weight:300}
+.feature-tag{display:inline-block;margin-top:1rem;padding:0.2rem 0.6rem;background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.15);border-radius:100px;font-size:0.65rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase}
+
+.comparison-table{border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);overflow:hidden;margin-top:2.5rem;background:rgba(0,0,0,0.4);backdrop-filter:blur(20px)}
+.comp-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.1)}
+.comp-head div{padding:1rem 1.25rem;font-size:0.78rem;font-weight:600;text-align:center}
+.comp-head .ours{color:var(--gold)}
+.comp-head .dim{color:var(--text3)}
+.comp-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,0.06)}
+.comp-row:last-child{border-bottom:none}
+.comp-row div{padding:0.875rem 1.25rem;font-size:0.82rem;text-align:center;display:flex;align-items:center;justify-content:center}
+.comp-row .feat{text-align:left;justify-content:flex-start;color:var(--text2);font-weight:300}
+.yes{color:var(--green)}
+.no{color:var(--text3)}
+.ours-val{color:var(--gold);font-weight:500}
+.price-row{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.08)}
+.price-row div{padding:1.25rem;text-align:center}
+.price-big{font-family:'Inter',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-0.04em;line-height:1}
+.price-small{font-size:0.72rem;color:var(--text3);margin-top:0.3rem}
+
+.steps-list{display:flex;flex-direction:column;gap:0;margin-top:2.5rem}
+.step-item{display:flex;gap:1.5rem;align-items:flex-start;padding:1.75rem 0;border-bottom:1px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:2.5rem;height:2.5rem;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px}
+.step-title{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.4rem;letter-spacing:-0.01em}
+.step-desc{font-size:0.85rem;color:var(--text2);font-weight:300;line-height:1.65}
+
+.cta-box{background:rgba(0,0,0,0.45);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:3rem;text-align:center;margin-top:3rem}
+.cta-box h2{font-size:1.8rem;margin-bottom:0.75rem}
+.cta-box p{color:var(--text2);font-weight:300;margin-bottom:2rem;font-size:0.9rem;max-width:400px;margin-left:auto;margin-right:auto}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:5rem}
+.footer-logo{font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;color:var(--text2);letter-spacing:-0.02em;text-decoration:none}
+.footer-logo span{color:var(--gold)}
+footer p{font-size:0.75rem;color:var(--text3)}
+.footer-links{display:flex;gap:1.25rem}
+.footer-links a{font-size:0.75rem;color:var(--text3);text-decoration:none}
+.footer-links a:hover{color:var(--text2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:680px){
+  nav{padding:0.875rem 1.25rem}
+  .feature-grid{grid-template-columns:1fr}
+  .comp-head,.comp-row,.price-row{grid-template-columns:1fr 1fr 1fr}
+  .comp-head div,.comp-row div,.price-row div{padding:0.625rem 0.5rem;font-size:0.72rem}
+  .section{padding:3rem 1.25rem}
+  footer{padding:1.25rem;flex-direction:column;align-items:flex-start}
+}
+
+.gradient-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:0;background:#0d0d0d;overflow:hidden;pointer-events:none}
+body > *:not(.gradient-bg){position:relative;z-index:1}body{background:#0d0d0d}
+.gradient-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:1}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(74,222,128,0.13),transparent 70%);top:-200px;left:-200px;animation:orb1move 18s ease-in-out infinite}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.10),transparent 70%);top:40%;right:-200px;animation:orb2move 14s ease-in-out infinite}
+.orb3{width:800px;height:800px;background:radial-gradient(circle,rgba(80,60,200,0.07),transparent 70%);top:70%;left:-100px;animation:orb3move 20s ease-in-out infinite}
+@keyframes orb1move{0%,100%{transform:translate(0,0)}33%{transform:translate(80px,60px)}66%{transform:translate(-40px,120px)}}
+@keyframes orb2move{0%,100%{transform:translate(0,0)}33%{transform:translate(-60px,80px)}66%{transform:translate(40px,-60px)}}
+@keyframes orb3move{0%,100%{transform:translate(0,0)}33%{transform:translate(60px,-40px)}66%{transform:translate(-80px,60px)}}
+</style>
+</head>
+<body>
+<div class="gradient-bg"><div class="gradient-orb orb1"></div><div class="gradient-orb orb2"></div><div class="gradient-orb orb3"></div><div class="gradient-orb orb4"></div><div class="gradient-orb orb5"></div></div>
+  <div style="position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.08),transparent 70%);top:40%;right:-200px;border-radius:50%;filter:blur(100px);animation:orb2move 14s ease-in-out infinite"></div>
+  <div style="position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(80,60,200,0.06),transparent 70%);bottom:10%;left:10%;border-radius:50%;filter:blur(100px);animation:orb3move 20s ease-in-out infinite"></div>
+</div>
+<style>
+body>*:not(div:first-child){position:relative;z-index:1}
+@keyframes orb1move{0%,100%{transform:translate(0,0)}33%{transform:translate(80px,60px)}66%{transform:translate(-40px,120px)}}
+@keyframes orb2move{0%,100%{transform:translate(0,0)}33%{transform:translate(-60px,80px)}66%{transform:translate(40px,-60px)}}
+@keyframes orb3move{0%,100%{transform:translate(0,0)}33%{transform:translate(100px,-80px)}66%{transform:translate(-60px,40px)}}
+</style>
+<nav>
+  <a href="index.html" class="logo">Stay<span>tim</span></a>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="index.html" class="nav-back">← Home</a>
+    <a href="onboarding.html" class="nav-cta">Get Started Free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Everything Staytim Does</div>
+  <h1>Four AI agents.<br><em>One complete team.</em></h1>
+  <p class="hero-sub">Every feature designed for small businesses that need results fast - without a technical team, a big budget, or weeks of setup.</p>
+  <a href="onboarding.html" class="btn-gold">Set Up Free - 3 Minutes</a>
+</div>
+
+<!-- AGENTS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">The Agents</div>
+    <h2 class="reveal">What runs in the background</h2>
+    <p class="section-desc reveal">Four specialized AI agents, each handling a different part of your customer journey - automatically, 24/7.</p>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-num">01</div>
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="feature-title">Replies to every message instantly</div>
+        <div class="feature-desc">A customer asks your price at 11pm. Staytim replies in 3 seconds with your exact services and rates. Works on WhatsApp, your website, and Instagram DMs. Day or night, every single time.</div>
+        <div class="feature-tag">Always On</div>
+      </div>
+      <div class="feature-card reveal d1">
+        <div class="feature-num">02</div>
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="feature-title">Texts clients who didn't book</div>
+        <div class="feature-desc">Someone was interested but went quiet? Staytim follows up at 24 hours, 3 days, and 7 days with a friendly message. Most of them come back. You do absolutely nothing.</div>
+        <div class="feature-tag">Zero Effort</div>
+      </div>
+      <div class="feature-card reveal d2">
+        <div class="feature-num">03</div>
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="feature-title">Asks happy clients for Google reviews</div>
+        <div class="feature-desc">After every visit, Staytim sends a friendly message asking satisfied clients to leave a review. No awkward asking in person. Your Google rating grows every single week on autopilot.</div>
+        <div class="feature-tag">Builds Trust</div>
+      </div>
+      <div class="feature-card reveal d3">
+        <div class="feature-num">04</div>
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="feature-title">Creates your social posts every week</div>
+        <div class="feature-desc">Every week Staytim writes ready-to-post Instagram and Facebook content based on your services and promotions. You review and hit publish. Saves 3+ hours every week.</div>
+        <div class="feature-tag">3hrs Saved</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">How It Works</div>
+    <h2 class="reveal">Live in 10 minutes</h2>
+    <p class="section-desc reveal">No technical knowledge. No IT team. No complicated setup. Just your business details and you're done.</p>
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div><div class="step-title">Tell us about your business</div><div class="step-desc">Your services, prices, hours, and address. Takes about 3 minutes. Fill in a simple form - no coding, no configuration.</div></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div><div class="step-title">Connect your channels</div><div class="step-desc">Link WhatsApp Business, add our widget to your website, or connect Instagram. One click each. We handle all the technical setup.</div></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div><div class="step-title">Your AI goes live</div><div class="step-desc">From this moment, every inquiry gets answered, every lead gets followed up, every happy client gets asked for a review. Automatically.</div></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div><div class="step-title">Watch bookings grow</div><div class="step-desc">Your dashboard shows every conversation handled, lead converted, and review collected - while you focused on your work.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">Why Staytim</div>
+    <h2 class="reveal">$99/mo vs $3,000/mo receptionist</h2>
+    <p class="section-desc reveal">Everything a full-time receptionist does - for a fraction of the cost.</p>
+    <div class="comparison-table reveal">
+      <div class="comp-head">
+        <div style="text-align:left;color:var(--text2)">Feature</div>
+        <div class="dim">Human Receptionist</div>
+        <div class="ours">Staytim AI</div>
+      </div>
+      <div class="comp-row"><div class="feat">Available 24/7</div><div class="no">Business hours only</div><div class="yes ours-val">Always on</div></div>
+      <div class="comp-row"><div class="feat">Reply in under 3 seconds</div><div class="no">Minutes to hours</div><div class="yes ours-val">Under 3 seconds</div></div>
+      <div class="comp-row"><div class="feat">WhatsApp + Instagram</div><div class="no">Usually phone only</div><div class="yes ours-val">All channels</div></div>
+      <div class="comp-row"><div class="feat">Follows up with leads</div><div class="no">Often forgotten</div><div class="yes ours-val">Automatic sequences</div></div>
+      <div class="comp-row"><div class="feat">Collects Google reviews</div><div class="no">Rarely done</div><div class="yes ours-val">After every visit</div></div>
+      <div class="comp-row"><div class="feat">Writes social content</div><div class="no">Not included</div><div class="yes ours-val">Weekly, auto-generated</div></div>
+      <div class="comp-row"><div class="feat">Multiple languages</div><div class="no">Usually one</div><div class="yes ours-val">Any language, auto</div></div>
+      <div class="price-row">
+        <div></div>
+        <div><div class="price-big" style="color:var(--text3)">$3,000+</div><div class="price-small">per month + benefits</div></div>
+        <div><div class="price-big" style="color:var(--gold)">$99</div><div class="price-small">per month, cancel anytime</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="section-inner">
+    <div class="cta-box reveal">
+      <h2>Ready to try it?</h2>
+      <p>Set up your AI assistant in 3 minutes. Free for 30 days - no credit card required.</p>
+      <a href="onboarding.html" class="btn-gold">Set Up Free Now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">Stay<span>tim</span></a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="demo.html">Demo</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+  <p>© 2026 Staytim · staytim.io</p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+</script>
+</body>
+</html>

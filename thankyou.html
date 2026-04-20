@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your AI is Ready — Staytim</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d0d0d'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' font-weight='700' fill='%23c9a96e'>S</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d0d0d;--gold:#c9a96e;--gold2:#e2c48a;--text:#eeeae0;--text2:#8a8680;--text3:#4a4844;--green:#4ade80;--border:rgba(255,255,255,0.08)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* gradient bg */
+.grad{position:fixed;inset:0;z-index:0;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px)}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(74,222,128,0.12),transparent 70%);top:-150px;left:-150px;animation:o1 16s ease-in-out infinite}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.09),transparent 70%);bottom:-100px;right:-100px;animation:o2 12s ease-in-out infinite}
+@keyframes o1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,80px)}}
+@keyframes o2{0%,100%{transform:translate(0,0)}50%{transform:translate(-80px,-60px)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(13,13,13,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.1rem;text-decoration:none;letter-spacing:-0.03em}
+.logo .stay{color:var(--text)}.logo .tim{color:var(--gold)}
+
+.page{position:relative;z-index:1;padding:7rem 1.5rem 4rem;max-width:700px;margin:0 auto}
+
+/* Success header */
+.success-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);padding:0.4rem 1rem;border-radius:100px;font-size:0.75rem;color:var(--green);font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.success-badge::before{content:'✓';font-weight:700}
+h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.04em;line-height:1.1;margin-bottom:1rem;color:#fff}
+h1 em{font-style:normal;color:var(--gold)}
+.intro{font-size:0.95rem;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:3rem}
+
+/* Share link box */
+.share-box{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.share-label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.75rem}
+.share-url{display:flex;gap:0.625rem;align-items:center}
+.share-url-text{flex:1;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:0.7rem 1rem;font-size:0.875rem;color:var(--text);font-family:'Inter',sans-serif;letter-spacing:-0.01em}
+.copy-btn{background:var(--green);color:#000;padding:0.7rem 1.25rem;border-radius:7px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.8rem;border:none;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0}
+.copy-btn:hover{background:#6beba0}
+.share-hint{font-size:0.78rem;color:var(--text3);margin-top:0.75rem;line-height:1.6}
+
+/* Options */
+.section-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:1.25rem;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:1rem;margin-bottom:3rem}
+.option{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color 0.2s;cursor:default}
+.option:hover{border-color:rgba(255,255,255,0.15)}
+.option-num{width:28px;height:28px;background:rgba(201,169,110,0.1);border:1px solid rgba(201,169,110,0.2);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px}
+.option-title{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.3rem;letter-spacing:-0.01em}
+.option-desc{font-size:0.82rem;color:var(--text2);font-weight:300;line-height:1.6}
+.option-action{display:inline-flex;align-items:center;gap:0.375rem;margin-top:0.625rem;font-size:0.8rem;font-weight:500;color:var(--gold);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;padding:0;transition:gap 0.2s}
+.option-action:hover{gap:0.625rem}
+.option-badge{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:100px;margin-left:0.5rem}
+.badge-easy{background:rgba(74,222,128,0.1);color:var(--green);border:1px solid rgba(74,222,128,0.2)}
+.badge-popular{background:rgba(201,169,110,0.1);color:var(--gold);border:1px solid rgba(201,169,110,0.2)}
+
+/* Test chat */
+.test-section{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;margin-bottom:3rem}
+.test-header{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between}
+.test-title{font-size:0.85rem;font-weight:600;color:var(--text)}
+.test-status{font-size:0.72rem;color:var(--green);display:flex;align-items:center;gap:0.375rem}
+.test-chat{padding:1rem 1.25rem;display:flex;flex-direction:column;gap:0.625rem;min-height:120px}
+.test-msg-u{align-self:flex-end;background:rgba(255,255,255,0.08);padding:0.55rem 0.875rem;border-radius:12px 12px 3px 12px;font-size:0.82rem;color:var(--text);max-width:85%}
+.test-msg-ai{align-self:flex-start;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.15);padding:0.55rem 0.875rem;border-radius:12px 12px 12px 3px;font-size:0.82rem;color:var(--text);max-width:90%;line-height:1.5}
+.test-input{border-top:1px solid rgba(255,255,255,0.07);padding:0.75rem 1.25rem;display:flex;gap:0.625rem}
+.test-field{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:0.55rem 1rem;font-size:0.82rem;color:var(--text);font-family:'Inter',sans-serif;outline:none}
+.test-field:focus{border-color:rgba(74,222,128,0.3)}
+.test-field::placeholder{color:var(--text3)}
+.test-send{background:var(--gold);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s}
+.test-send:hover{background:var(--gold2)}
+
+/* Dashboard CTA */
+.dash-cta{text-align:center;padding:2rem;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.07);border-radius:12px}
+.dash-cta p{font-size:0.85rem;color:var(--text2);margin-bottom:1.25rem;font-weight:300}
+.btn-gold{background:var(--gold);color:#000;padding:0.75rem 1.75rem;border-radius:8px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.875rem;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-gold:hover{background:var(--gold2)}
+
+@media(max-width:600px){
+  nav{padding:0.875rem 1.25rem}
+  .page{padding:5.5rem 1.25rem 3rem}
+  .share-url{flex-direction:column}
+  .copy-btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="grad"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+
+<nav>
+  <a href="index.html" class="logo"><span class="stay">Stay</span><span class="tim">tim</span></a>
+  <a href="dashboard.html" style="font-size:0.82rem;color:var(--text2);text-decoration:none">View Dashboard →</a>
+</nav>
+
+<div class="page">
+
+  <div class="success-badge">AI assistant created</div>
+  <h1>Your AI is ready.<br><em>Now let's connect it.</em></h1>
+  <p class="intro">No coding needed. Pick the easiest way for you — you can always add more channels later from your dashboard.</p>
+
+  <!-- SHARE LINK -->
+  <div class="share-box">
+    <div class="share-label">✦ Your personal chat link — share it anywhere</div>
+    <div class="share-url">
+      <div class="share-url-text" id="shareUrl">staytim.io/chat/your-business</div>
+      <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+    </div>
+    <p class="share-hint">Share this link on Instagram bio, Google Business, Facebook page, WhatsApp status — customers click it and chat instantly. No app needed.</p>
+  </div>
+
+  <!-- 3 OPTIONS -->
+  <div class="section-title">3 ways to connect — pick what works for you</div>
+  <div class="options">
+
+    <!-- Option 1 - Share link -->
+    <div class="option">
+      <div class="option-num">1</div>
+      <div>
+        <div class="option-title">Share your link <span class="option-badge badge-easy">Easiest</span></div>
+        <div class="option-desc">Put your Staytim link in your Instagram bio, Google Business profile, Facebook page, or just text it to customers. They click and chat instantly. Works on any phone, no app download needed.</div>
+        <button class="option-action" onclick="copyLink()">Copy your link →</button>
+      </div>
+    </div>
+
+    <!-- Option 2 - WhatsApp -->
+    <div class="option">
+      <div class="option-num">2</div>
+      <div>
+        <div class="option-title">Connect WhatsApp Business <span class="option-badge badge-popular">Most popular</span></div>
+        <div class="option-desc">If you have a WhatsApp Business account, your AI replies to every message automatically. Customers message you on WhatsApp — your AI handles it 24/7. No extra app, no code.</div>
+        <a href="mailto:hello@staytim.io?subject=Connect my WhatsApp" class="option-action">Email us to connect →</a>
+      </div>
+    </div>
+
+    <!-- Option 3 - Website -->
+    <div class="option">
+      <div class="option-num">3</div>
+      <div>
+        <div class="option-title">Add to your website</div>
+        <div class="option-desc">If you have a website and someone who can edit it — we provide one line of code to add the chat bubble. Or email us and we'll do it for you free.</div>
+        <a href="mailto:hello@staytim.io?subject=Add chat to my website" class="option-action">Email us to set it up →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TEST YOUR AI -->
+  <div class="section-title">Test your AI right now</div>
+  <div class="test-section">
+    <div class="test-header">
+      <div class="test-title">Your AI assistant</div>
+      <div class="test-status"><div style="width:6px;height:6px;background:var(--green);border-radius:50%"></div>Active</div>
+    </div>
+    <div class="test-chat" id="testChat">
+      <div class="test-msg-ai">Hi! I'm your AI assistant. Ask me anything — I'll answer exactly how your customers will experience it.</div>
+    </div>
+    <div class="test-input">
+      <input class="test-field" id="testInput" placeholder="Type a question like your customer would..." onkeydown="if(event.key==='Enter')sendTest()"/>
+      <button class="test-send" onclick="sendTest()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#000"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dash-cta">
+    <p>See all your conversations, bookings, and leads in one place.</p>
+    <a href="dashboard.html" class="btn-gold">View Your Dashboard →</a>
+  </div>
+
+</div>
+
+<script>
+// Copy link
+function copyLink() {
+  const url = document.getElementById('shareUrl').textContent;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    btn.style.background = '#4ade80';
+    setTimeout(() => { btn.textContent = 'Copy Link'; btn.style.background = ''; }, 2000);
+  });
+}
+
+// Test chat
+const API_KEY = "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";
+const businessName = new URLSearchParams(window.location.search).get('business') || 'your business';
+const SYSTEM = `You are a friendly AI assistant for ${businessName}. You were just set up through Staytim. For this test, answer general questions helpfully. Keep replies to 1-2 sentences.`;
+let msgs = [];
+let busy = false;
+
+function addMsg(role, text) {
+  const c = document.getElementById('testChat');
+  const d = document.createElement('div');
+  d.className = role === 'u' ? 'test-msg-u' : 'test-msg-ai';
+  d.textContent = text;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+async function sendTest() {
+  const inp = document.getElementById('testInput');
+  const text = inp.value.trim();
+  if (!text || busy) return;
+  inp.value = '';
+  addMsg('u', text);
+  msgs.push({role:'user', content:text});
+  busy = true;
+  if (API_KEY === 'YOUR_API_KEY_HERE') {
+    setTimeout(() => { addMsg('ai', 'This is a demo reply — your real AI would answer based on your actual business info!'); busy = false; }, 800);
+    return;
+  }
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:150,system:SYSTEM,messages:msgs.slice(-6)})
+    });
+    const data = await r.json();
+    if (data.content?.[0]) {
+      const reply = data.content[0].text;
+      msgs.push({role:'assistant', content:reply});
+      addMsg('ai', reply);
+    }
+  } catch(e) { addMsg('ai', 'Something went wrong. Please try again.'); }
+  busy = false;
+}
+
+// Set share URL from business name in URL params
+const biz = new URLSearchParams(window.location.search).get('business');
+if (biz) {
+  const slug = biz.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  document.getElementById('shareUrl').textContent = `staytim.io/chat/${slug}`;
+}
+</script>
+</body>
+</html>

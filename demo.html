@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staytim — Live Demo</title>
+<link href="https://fonts.bunny.net/css?family=geist:300,400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--black:#080808;--surface:#111111;--surface2:#161616;--surface3:#1e1e1e;
+--border:#2a2a2a;--border2:#333;--gold:#c9a96e;--gold2:#e8c88a;
+--text:#f0ece4;--text2:#9a9690;--text3:#5a5652;
+--cream:#faf8f4;--warm:#f5f0e8;--dark-text:#2c2520;--dark-border:#e8e0d5;
+}
+body{background:var(--black);font-family:'Geist',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+
+/* HEADER */
+.demo-header{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.logo{font-family:'Geist',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);letter-spacing:0.02em;text-decoration:none;overflow:visible;line-height:1.4}
+.logo span{color:var(--gold)}
+.demo-badge{display:flex;align-items:center;gap:0.5rem;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);padding:0.35rem 0.875rem;border-radius:100px;font-size:0.72rem;color:#4ade80;font-weight:500}
+.demo-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pg 2s infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:0.4}}
+.back-btn{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:0.4rem 1rem;border-radius:6px;font-family:'Geist',sans-serif;font-weight:600;font-size:0.75rem;cursor:pointer;text-decoration:none;transition:all 0.2s}
+.back-btn:hover{border-color:var(--text);color:var(--text)}
+
+/* MAIN */
+.demo-main{flex:1;display:flex;align-items:stretch;flex-wrap:wrap}
+
+/* LEFT — INFO */
+.demo-left{flex:1;min-width:300px;padding:3rem 2.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.demo-eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1rem;font-family:'Geist',sans-serif}
+.demo-title{font-family:'Geist',sans-serif;font-size:1.8rem;font-weight:600;line-height:1.25;padding-bottom:0.08em;color:var(--text);line-height:1.2;margin-bottom:1rem}
+.demo-desc{color:var(--text2);font-weight:300;line-height:1.7;margin-bottom:2rem;font-size:0.9rem}
+.demo-suggestions{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem}
+.demo-suggestions-label{font-size:0.75rem;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.25rem;font-family:'Geist',sans-serif}
+.sugg-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:0.6rem 1rem;border-radius:8px;font-size:0.82rem;font-family:'Geist',sans-serif;cursor:pointer;transition:all 0.2s;text-align:left;font-weight:300;display:flex;align-items:center;justify-content:space-between;gap:0.5rem}.sugg-btn::after{content:"→";color:var(--text3);font-size:0.75rem;transition:color 0.2s}.sugg-btn:hover::after{color:var(--gold)}
+.sugg-btn:hover{background:var(--surface3);border-color:var(--border2);color:var(--text)}
+.demo-biz-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-top:auto}
+.demo-biz-name{font-family:'Geist',sans-serif;font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.25rem}
+.demo-biz-details{font-size:0.78rem;color:var(--text3);display:flex;flex-direction:column;gap:0.2rem;font-weight:300}
+
+/* RIGHT — CHAT */
+.demo-right{flex:1;min-width:320px;display:flex;flex-direction:column;background:var(--cream)}
+.chat-header{background:var(--black);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:0.875rem;flex-shrink:0;border-bottom:1px solid var(--border)}
+.chat-av{width:42px;height:42px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Geist',sans-serif;font-size:1rem;font-weight:700;color:var(--black);flex-shrink:0}
+.chat-hname{font-family:'Geist',sans-serif;font-size:1rem;font-weight:600;color:var(--text)}
+.chat-hstatus{display:flex;align-items:center;gap:0.3rem;font-size:0.7rem;color:var(--text3);margin-top:1px}
+.sdot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pg 2s infinite}
+
+.chat-msgs{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1rem;scroll-behavior:smooth}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--dark-border);border-radius:10px}
+
+.cm{display:flex;gap:0.5rem;align-items:flex-end;max-width:80%}
+.cm.bot{align-self:flex-start}
+.cm.usr{align-self:flex-end;flex-direction:row-reverse}
+.cm-av{width:32px;height:32px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Geist',sans-serif;font-size:0.7rem;font-weight:700;color:var(--black);flex-shrink:0}
+.cm-b{padding:0.75rem 1rem;border-radius:14px;font-size:0.875rem;line-height:1.55;font-weight:300}
+.cm.bot .cm-b{background:var(--warm);color:var(--dark-text);border-bottom-left-radius:4px}
+.cm.usr .cm-b{background:var(--black);color:var(--text);border-bottom-right-radius:4px}
+
+.typing-ind{display:flex;gap:4px;padding:0.75rem 1rem;align-items:center}
+.typing-ind span{width:7px;height:7px;background:#b5ada6;border-radius:50%;animation:tb 1.2s infinite}
+.typing-ind span:nth-child(2){animation-delay:0.2s}
+.typing-ind span:nth-child(3){animation-delay:0.4s}
+@keyframes tb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+.chat-inp-wrap{padding:1rem 1.5rem;border-top:1px solid var(--dark-border);display:flex;gap:0.625rem;align-items:center;flex-shrink:0;background:#fff}
+.chat-inp{flex:1;border:1.5px solid var(--dark-border);border-radius:100px;padding:0.7rem 1rem;font-family:'Geist',sans-serif;font-size:0.875rem;font-weight:300;color:var(--dark-text);outline:none;transition:border-color 0.2s;background:var(--warm)}
+.chat-inp:focus{border-color:var(--gold)}
+.chat-inp::placeholder{color:#b5ada6}
+.send-b{width:40px;height:40px;background:var(--black);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.2s}
+.send-b:hover{background:#2d2720;transform:scale(1.05)}
+.send-b svg{width:16px;height:16px;fill:var(--cream)}
+
+.cta-strip{background:var(--surface);border-top:1px solid var(--border);padding:1rem 1.5rem;text-align:center}
+.cta-strip p{font-size:0.8rem;color:var(--text2);margin-bottom:0.5rem;font-weight:300}
+.cta-strip a{background:var(--gold);color:var(--black);padding:0.5rem 1.5rem;border-radius:6px;font-family:'Geist',sans-serif;font-weight:700;font-size:0.8rem;text-decoration:none;display:inline-block;transition:background 0.2s}
+.cta-strip a:hover{background:var(--gold2)}
+</style>
+</head>
+<body>
+
+<div class="demo-header">
+  <a href="index.html" class="logo">Stay<span>tim</span></a>
+  <div class="demo-badge"><div class="demo-dot"></div>Live AI Demo</div>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+</div>
+
+<div class="demo-main">
+  <!-- LEFT -->
+  <div class="demo-left">
+    <div class="demo-eyebrow">Interactive Demo</div>
+    <h1 class="demo-title">Try Staytim<br>right now</h1>
+    <p class="demo-desc">This is a real AI assistant — powered by Claude. Ask it anything about Bella Studio and see how it responds to your customers 24/7.</p>
+
+    <div class="demo-suggestions">
+      <div class="demo-suggestions-label">Try asking</div>
+      <button class="sugg-btn" onclick="sendQuick('What services do you offer?')">What services do you offer?</button>
+      <button class="sugg-btn" onclick="sendQuick('How much is a balayage?')">How much is a balayage?</button>
+      <button class="sugg-btn" onclick="sendQuick('Do you have availability this Saturday?')">Do you have this Saturday?</button>
+      <button class="sugg-btn" onclick="sendQuick('What are your opening hours?')">What are your opening hours?</button>
+      <button class="sugg-btn" onclick="sendQuick('Where are you located?')">Where are you located?</button>
+      <button class="sugg-btn" onclick="sendQuick('I want to book a haircut')">I want to book a haircut</button>
+    </div>
+
+    <div class="demo-biz-card">
+      <div class="demo-biz-name">Bella Studio</div>
+      <div class="demo-biz-details">
+        <span>📍 2840 Fillmore St, San Francisco</span>
+        <span>🕐 Mon–Sat 10am–7pm</span>
+        <span>📞 (415) 555-0182</span>
+        <span>💰 Services from $50–$500</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — CHAT -->
+  <div class="demo-right">
+    <div class="chat-header">
+      <div class="chat-av">BS</div>
+      <div>
+        <div class="chat-hname">Bella Studio Assistant</div>
+        <div class="chat-hstatus"><div class="sdot"></div>Online — replies instantly</div>
+      </div>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="cm bot">
+        <div class="cm-av">BS</div>
+        <div class="cm-b">Hi! Welcome to Bella Studio. I'm here to help with bookings, pricing, and any questions about our services. How can I help you today?</div>
+      </div>
+    </div>
+    <div class="chat-inp-wrap">
+      <input class="chat-inp" id="chatInp" type="text" placeholder="Ask anything about the salon..." onkeydown="if(event.key==='Enter')sendMsg()" />
+      <button class="send-b" onclick="sendMsg()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="cta-strip">
+      <p>Want this AI for your own business?</p>
+      <a href="onboarding.html">Set Up My AI Assistant →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_KEY = "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";
+
+const SYSTEM = `You are a friendly and professional AI assistant for Bella Studio, a hair salon in San Francisco.
+
+BUSINESS INFO:
+- Name: Bella Studio
+- Address: 2840 Fillmore St, San Francisco, CA
+- Hours: Monday–Saturday 10am–7pm. Closed Sundays.
+- Phone: (415) 555-0182
+
+SERVICES & PRICING:
+- Haircut & Blowout: $50–$120
+- Color — Single Process: $80–$150
+- Highlights/Balayage: $150–$300
+- Full Color + Cut: $180–$350
+- Blowout only: $50–$80
+- Deep Conditioning: $40–$60
+- Keratin Treatment: $200–$400
+- Updo / Special Occasion: $80–$150
+- Consultation: Free
+
+BOOKING: Call (415) 555-0182 or walk in. Recommend booking 1–2 weeks ahead for color services.
+
+LANGUAGE: Detect the language the customer is writing in and respond in that same language automatically. If they write in Spanish, reply in Spanish. If French, reply in French. Always match their language.
+
+AFTER HOURS: Our hours are Monday–Saturday 10am–7pm. If a customer contacts outside these hours, acknowledge you are outside business hours but let them know you can still answer questions and take their details for a callback.
+
+LEAD CAPTURE: If a customer seems interested in booking but hasn't given their name, politely ask for their name and preferred contact number so the team can follow up.
+
+BOOKING FLOW: When a customer wants to book, collect the following step by step:
+1. What service they want
+2. Their preferred day and time
+3. Their name and phone number
+Then confirm: "Great! I've noted your request for [service] on [day/time]. The team will confirm your booking at [phone number] shortly."
+
+PERSONALITY: Warm, professional, and helpful. Keep responses concise — 2–3 sentences max unless collecting booking details. Never make up information. If you don't know something, offer to have the team call them back.
+
+UNKNOWN QUESTIONS: If asked something you don't know, say: "That's a great question — let me have our team get back to you on that. Can I take your name and number?"`;
+
+let messages = [];
+let busy = false;
+
+function sendQuick(text) {
+  document.getElementById('chatInp').value = text;
+  sendMsg();
+}
+
+function addMsg(role, text) {
+  const c = document.getElementById('chatMsgs');
+  const d = document.createElement('div');
+  d.className = `cm ${role}`;
+  if(role==='bot') d.innerHTML = `<div class="cm-av">BS</div><div class="cm-b">${text}</div>`;
+  else d.innerHTML = `<div class="cm-b">${text}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function showTyping() {
+  const c = document.getElementById('chatMsgs');
+  const d = document.createElement('div');
+  d.className='cm bot';d.id='typingInd';
+  d.innerHTML=`<div class="cm-av">BS</div><div class="cm-b typing-ind"><span></span><span></span><span></span></div>`;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function removeTyping(){const t=document.getElementById('typingInd');if(t)t.remove();}
+
+async function sendMsg() {
+  const inp = document.getElementById('chatInp');
+  const text = inp.value.trim();
+  if(!text || busy) return;
+  inp.value = '';
+  addMsg('usr', text);
+  messages.push({role:'user',content:text});
+  busy = true;
+  showTyping();
+
+  if(API_KEY === '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') {
+    removeTyping();
+    addMsg('bot', '⚠️ Demo API key not configured. Please add your Claude API key to demo.html');
+    busy = false;
+    return;
+  }
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:300,system:SYSTEM,messages:messages.slice(-10)})
+    });
+    const data = await res.json();
+    removeTyping();
+    if(data.content?.[0]) {
+      const reply = data.content[0].text;
+      messages.push({role:'assistant',content:reply});
+      addMsg('bot', reply);
+    } else {
+      addMsg('bot','Sorry, something went wrong. Please call us at (415) 555-0182 📞');
+    }
+  } catch(e) {
+    removeTyping();
+    addMsg('bot','Sorry, connection issue. Please call us at (415) 555-0182 📞');
+  }
+  busy = false;
+}
+</script>
+</body>
+</html>

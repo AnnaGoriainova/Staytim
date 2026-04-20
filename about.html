@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Staytim</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080808'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' font-weight='700' fill='%23c9a96e'>S</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-y:scroll;scroll-behavior:smooth}
+:root{
+--black:#0d0d0d;--surface:#111111;--surface2:#161616;
+--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+--gold:#c9a96e;--gold2:#e2c48a;--text:#eeeae0;--text2:#8a8680;--text3:#4a4844;
+--radius:10px;--radius-lg:16px;
+}
+body{background:#0d0d0d;color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:9997;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+nav{transition:background 0.3s;background:transparent}nav.scrolled{background:rgba(13,13,13,0.85);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.25rem;color:var(--text);letter-spacing:-0.03em;text-decoration:none;line-height:1.4}
+.logo span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-link{color:var(--text2);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
+.nav-link:hover{color:var(--text)}
+.nav-cta{background:var(--gold);color:#06060a;padding:0.5rem 1.25rem;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.82rem;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--gold2)}
+
+.hero{padding:9rem 2.5rem 5rem;max-width:800px;margin:0 auto}
+.hero-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.04em;margin-bottom:2rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-intro{font-size:1.1rem;color:var(--text2);line-height:1.85;font-weight:300;max-width:600px}
+
+.divider{height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.4),transparent);margin:4rem auto;max-width:800px}
+
+.story{max-width:680px;margin:0 auto;padding:0 2.5rem}
+.story-block{margin-bottom:2.75rem;opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.story-block.visible{opacity:1;transform:translateY(0)}
+.story-block p{font-size:1rem;color:var(--text2);line-height:1.9;font-weight:300;margin-bottom:1.1rem}
+.story-block p strong{color:var(--text);font-weight:500}
+.story-block p em{color:var(--gold);font-style:normal}
+
+.pull-quote{background:var(--surface);border-left:2px solid var(--gold);padding:1.75rem 2rem;border-radius:0 var(--radius) var(--radius) 0;margin:2.5rem 0;opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.pull-quote.visible{opacity:1;transform:translateY(0)}
+.pull-quote p{font-size:1.15rem;color:var(--text);line-height:1.7;font-weight:400;font-style:italic;letter-spacing:-0.01em}
+
+/* TRUST */
+.trust-section{max-width:800px;margin:2rem auto 0;padding:0 2.5rem}
+.trust-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2rem}
+.trust-title{font-size:1.8rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:1rem;line-height:1.2}
+.trust-sub{font-size:0.95rem;color:var(--text2);font-weight:300;line-height:1.75;margin-bottom:2.5rem;max-width:540px}
+.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+.trust-card{background:var(--surface);padding:1.75rem;opacity:0;transform:translateY(16px);transition:all 0.6s ease}
+.trust-card.visible{opacity:1;transform:translateY(0)}
+.trust-card:nth-child(2){transition-delay:0.1s}
+.trust-card:nth-child(3){transition-delay:0.2s}
+.trust-card:nth-child(4){transition-delay:0.3s}
+.trust-icon{width:40px;height:40px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.trust-card-title{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.4rem;letter-spacing:-0.01em}
+.trust-card-desc{font-size:0.8rem;color:var(--text2);line-height:1.6;font-weight:300}
+
+/* VALUES */
+.values-section{max-width:800px;margin:0 auto;padding:3.5rem 2.5rem 4rem;border-top:1px solid rgba(255,255,255,0.06)}
+.values-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2rem}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.value-card{background:var(--surface);padding:1.75rem;opacity:0;transform:translateY(16px);transition:all 0.6s ease}
+.value-card.visible{opacity:1;transform:translateY(0)}
+.value-card:nth-child(2){transition-delay:0.1s}
+.value-card:nth-child(3){transition-delay:0.2s}
+.value-num{font-size:0.65rem;font-weight:700;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+.value-title{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;letter-spacing:-0.01em}
+.value-desc{font-size:0.8rem;color:var(--text2);line-height:1.65;font-weight:300}
+
+.about-cta{max-width:680px;margin:2rem auto 5rem;padding:2.5rem;text-align:center;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.about-cta.visible{opacity:1;transform:translateY(0)}
+.about-cta h2{font-size:1.7rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:0.75rem;line-height:1.2}
+.about-cta p{color:var(--text2);font-weight:300;margin-bottom:2rem;line-height:1.7;font-size:0.9rem}
+.btn-primary{background:var(--gold);color:#06060a;padding:0.875rem 2rem;border-radius:8px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.875rem;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px)}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;color:var(--text2);letter-spacing:-0.02em;text-decoration:none}
+.footer-logo span{color:var(--gold)}
+footer p{font-size:0.78rem;color:var(--text3)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .hero,.story,.trust-section,.values-section{padding-left:1.25rem;padding-right:1.25rem}
+  .hero{padding-top:7rem}
+  .about-cta{margin:2rem 1.25rem;padding:1.75rem 1.25rem}
+  footer{padding:1.5rem 1.25rem}
+}
+
+.gradient-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:0;background:#0d0d0d;overflow:hidden;pointer-events:none}
+body > *:not(.gradient-bg){position:relative;z-index:1}body{background:#0d0d0d}
+.gradient-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:1}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(74,222,128,0.13),transparent 70%);top:-200px;left:-200px;animation:orb1move 18s ease-in-out infinite}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.10),transparent 70%);top:40%;right:-200px;animation:orb2move 14s ease-in-out infinite}
+.orb3{width:800px;height:800px;background:radial-gradient(circle,rgba(80,60,200,0.07),transparent 70%);top:70%;left:-100px;animation:orb3move 20s ease-in-out infinite}
+@keyframes orb1move{0%,100%{transform:translate(0,0)}33%{transform:translate(80px,60px)}66%{transform:translate(-40px,120px)}}
+@keyframes orb2move{0%,100%{transform:translate(0,0)}33%{transform:translate(-60px,80px)}66%{transform:translate(40px,-60px)}}
+@keyframes orb3move{0%,100%{transform:translate(0,0)}33%{transform:translate(60px,-40px)}66%{transform:translate(-80px,60px)}}
+</style>
+</head>
+<body>
+<div class="gradient-bg"><div class="gradient-orb orb1"></div><div class="gradient-orb orb2"></div><div class="gradient-orb orb3"></div></div>
+
+<nav>
+  <a href="index.html" class="logo">Stay<span>tim</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">← Home</a>
+    <a href="onboarding.html" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">Our Story</div>
+  <h1>Built for the businesses<br>that <em>need it most.</em></h1>
+  <p class="hero-intro">Small businesses are the backbone of every neighborhood — run by real people, working hard, building something from nothing. When AI started changing everything, most of those tools weren't built for them. Staytim was.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- STAT BAR -->
+<div style="max-width:800px;margin:0 auto 4rem;padding:0 2.5rem">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06)">
+    <div style="background:#111111;padding:1.75rem 1.25rem;text-align:center">
+      <div style="font-family:'Inter',sans-serif;font-size:1.9rem;font-weight:800;color:#c9a96e;letter-spacing:-0.04em;line-height:1.2">33M+</div>
+      <div style="font-size:0.7rem;color:#4a4844;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.5rem;line-height:1.4">Small businesses in the US</div>
+    </div>
+    <div style="background:#111111;padding:1.75rem 1.25rem;text-align:center">
+      <div style="font-family:'Inter',sans-serif;font-size:1.9rem;font-weight:800;color:#c9a96e;letter-spacing:-0.04em;line-height:1.2">62%</div>
+      <div style="font-size:0.7rem;color:#4a4844;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.5rem;line-height:1.4">Miss inquiries daily</div>
+    </div>
+    <div style="background:#111111;padding:1.75rem 1.25rem;text-align:center">
+      <div style="font-family:'Inter',sans-serif;font-size:1.9rem;font-weight:800;color:#c9a96e;letter-spacing:-0.04em;line-height:1.2">$12K</div>
+      <div style="font-size:0.7rem;color:#4a4844;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.5rem;line-height:1.4">Average revenue lost per year</div>
+    </div>
+    <div style="background:#111111;padding:1.75rem 1.25rem;text-align:center">
+      <div style="font-family:'Inter',sans-serif;font-size:1.9rem;font-weight:800;color:#c9a96e;letter-spacing:-0.04em;line-height:1.2">40%</div>
+      <div style="font-size:0.7rem;color:#4a4844;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.5rem;line-height:1.4">More bookings with AI</div>
+    </div>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-block">
+    <p>Small businesses are the backbone of every community — run by real people, working hard, building something from nothing. But as AI started transforming industries, most of those tools were built for companies with engineering teams and enterprise budgets.</p>
+    <p><strong>The technology existed. The access didn't.</strong> Customer inquiries went unanswered. Leads went cold. Revenue walked out the door — not because business owners didn't care, but because there was simply no system in place to catch it.</p>
+  </div>
+
+  <div class="pull-quote">
+    <p>"Small businesses deserve the same technology as the big players. Not a watered-down version of it — the real thing, simple enough to use in three minutes."</p>
+  </div>
+
+  <div class="story-block">
+    <p>So we built Staytim. <strong>An AI assistant that any business can set up in minutes</strong> — no technical knowledge, no consultants, no enterprise budget required. It answers customer inquiries instantly, follows up with leads automatically, collects reviews, and creates content. Around the clock, without you lifting a finger.</p>
+    <p>The name comes from the Latin word <em>statim</em> — meaning <em>immediately</em>. Every customer gets a response. Every lead gets followed up. Every time.</p>
+  </div>
+</div>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <div class="trust-label reveal">Why You Can Trust Us</div>
+  <h2 class="trust-title reveal">Enterprise-grade AI.<br>Built for real businesses.</h2>
+  <p class="trust-sub reveal">Staytim is powered by the same AI technology trusted by millions of developers and businesses worldwide — made accessible for everyone.</p>
+  <div class="trust-grid">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="trust-card-title">Powered by Claude AI</div>
+      <div class="trust-card-desc">Built on Anthropic's Claude — one of the world's most trusted and safe AI systems, used by millions globally.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="trust-card-title">Your data is safe</div>
+      <div class="trust-card-desc">Your business information and customer conversations are encrypted and never shared or sold to third parties.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="trust-card-title">Real human support</div>
+      <div class="trust-card-desc">Every new business gets personal onboarding help. You're not a ticket number — we want you to succeed.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <div class="trust-card-title">Built to grow with you</div>
+      <div class="trust-card-desc">Start simple. Add more as your business grows. No contracts, no lock-in, cancel anytime.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL DIAGRAM -->
+<section style="max-width:800px;margin:0 auto;padding:0 2.5rem 2rem">
+  <div style="background:#111111;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:2.5rem;text-align:center">
+    <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#c9a96e;font-weight:500;margin-bottom:2rem">How Staytim Works</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap">
+      <!-- Step 1 -->
+      <div style="text-align:center;padding:1rem 1.25rem;min-width:120px">
+        <div style="width:48px;height:48px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div style="font-size:0.72rem;font-weight:600;color:#eeeae0;letter-spacing:-0.01em;margin-bottom:0.25rem">Set Up</div>
+        <div style="font-size:0.65rem;color:#4a4844;line-height:1.4">3 minutes,<br>no tech needed</div>
+      </div>
+      <!-- Arrow -->
+      <div style="color:#2a2a2a;font-size:1.2rem;padding:0 0.25rem;flex-shrink:0">›</div>
+      <!-- Step 2 -->
+      <div style="text-align:center;padding:1rem 1.25rem;min-width:120px">
+        <div style="width:48px;height:48px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div style="font-size:0.72rem;font-weight:600;color:#eeeae0;letter-spacing:-0.01em;margin-bottom:0.25rem">Customer Asks</div>
+        <div style="font-size:0.65rem;color:#4a4844;line-height:1.4">Via WhatsApp,<br>website or DM</div>
+      </div>
+      <!-- Arrow -->
+      <div style="color:#2a2a2a;font-size:1.2rem;padding:0 0.25rem;flex-shrink:0">›</div>
+      <!-- Step 3 -->
+      <div style="text-align:center;padding:1rem 1.25rem;min-width:120px">
+        <div style="width:48px;height:48px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div style="font-size:0.72rem;font-weight:600;color:#eeeae0;letter-spacing:-0.01em;margin-bottom:0.25rem">AI Replies</div>
+        <div style="font-size:0.65rem;color:#4a4844;line-height:1.4">Instantly, with<br>your exact info</div>
+      </div>
+      <!-- Arrow -->
+      <div style="color:#2a2a2a;font-size:1.2rem;padding:0 0.25rem;flex-shrink:0">›</div>
+      <!-- Step 4 -->
+      <div style="text-align:center;padding:1rem 1.25rem;min-width:120px">
+        <div style="width:48px;height:48px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div style="font-size:0.72rem;font-weight:600;color:#eeeae0;letter-spacing:-0.01em;margin-bottom:0.25rem">Booking Done</div>
+        <div style="font-size:0.65rem;color:#4a4844;line-height:1.4">Client booked,<br>you focus on work</div>
+      </div>
+      <!-- Arrow -->
+      <div style="color:#2a2a2a;font-size:1.2rem;padding:0 0.25rem;flex-shrink:0">›</div>
+      <!-- Step 5 -->
+      <div style="text-align:center;padding:1rem 1.25rem;min-width:120px">
+        <div style="width:48px;height:48px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div style="font-size:0.72rem;font-weight:600;color:#eeeae0;letter-spacing:-0.01em;margin-bottom:0.25rem">Revenue Grows</div>
+        <div style="font-size:0.65rem;color:#4a4844;line-height:1.4">Zero missed<br>opportunities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="values-label">What We Stand For</div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-num">01</div>
+      <div class="value-title">Small businesses first</div>
+      <div class="value-desc">Every decision starts with one question: does this genuinely help a small business owner? Not enterprise clients. Not investors. The person running things every day.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-num">02</div>
+      <div class="value-title">Simple by design</div>
+      <div class="value-desc">Three minutes to set up. No technical knowledge required. If it's complicated, it's not built for the right people.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-num">03</div>
+      <div class="value-title">Honest, always</div>
+      <div class="value-desc">We won't overpromise. We tell you what Staytim does and what it doesn't, and let the results speak for themselves.</div>
+    </div>
+  </div>
+</section>
+
+<div class="about-cta">
+  <h2>Give your business<br>a team it can rely on.</h2>
+  <p>Set up your AI assistant in 3 minutes — free for 30 days. No credit card, no technical knowledge needed.</p>
+  <a href="onboarding.html" class="btn-primary">Set Up Free — Takes 3 Minutes</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Stay<span>tim</span></a>
+  <p>© 2026 Staytim · staytim.io · <a href="privacy.html" style="color:var(--text3);text-decoration:none">Privacy</a> · <a href="terms.html" style="color:var(--text3);text-decoration:none">Terms</a></p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.08});
+document.querySelectorAll('.story-block,.pull-quote,.trust-card,.value-card,.about-cta,.reveal').forEach(el => obs.observe(el));
+</script>
+
+<script>
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+</script>
+</body>
+</html>
