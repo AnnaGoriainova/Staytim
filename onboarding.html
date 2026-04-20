@@ -688,7 +688,7 @@ function goStep3() {
   document.getElementById('progressFill').style.width = '100%';
 }
 
-function generateChatbot() {
+async function generateChatbot() {
   bizData.ownerName = document.getElementById('ownerName').value.trim();
   bizData.special = document.getElementById('bizSpecial').value.trim();
   const selectedPersonality = document.querySelector('input[name="personality"]:checked');
@@ -702,6 +702,30 @@ function generateChatbot() {
       document.getElementById(id).classList.add('done');
     }, (i + 1) * 800);
   });
+
+  // Submit business data to Staytim backend
+  try {
+    await fetch('https://staytim-production.up.railway.app/onboarding', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        business_name: bizData.name,
+        owner_name: bizData.ownerName,
+        email: bizData.email,
+        business_type: bizData.type,
+        services: bizData.services,
+        prices: bizData.prices,
+        hours: bizData.hours,
+        location: bizData.location,
+        personality: bizData.personality,
+        special: bizData.special,
+        phone: bizData.phone || ''
+      })
+    });
+  } catch(e) {
+    console.log('Submission error:', e);
+  }
+
   setTimeout(() => {
     setupDemo();
     document.getElementById('page2').classList.remove('active');

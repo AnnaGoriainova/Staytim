@@ -172,7 +172,23 @@ h1 em{font-style:normal;color:var(--gold)}
 </div>
 
 <script>
-// Copy link
+// Test chat
+const BACKEND = 'https://staytim-production.up.railway.app';
+
+// Get business name from URL or localStorage
+const params = new URLSearchParams(window.location.search);
+const businessName = params.get('business') || localStorage.getItem('staytim_biz') || 'your business';
+
+// Update page with business name
+document.querySelector('h1').innerHTML = `Your AI is ready,<br><em>${businessName}.</em>`;
+
+// Set share URL
+const slug = businessName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+document.getElementById('shareUrl').textContent = `staytim.io/chat/${slug}`;
+
+let msgs = [];
+let busy = false;
+
 function copyLink() {
   const url = document.getElementById('shareUrl').textContent;
   navigator.clipboard.writeText(url).then(() => {
@@ -182,13 +198,6 @@ function copyLink() {
     setTimeout(() => { btn.textContent = 'Copy Link'; btn.style.background = ''; }, 2000);
   });
 }
-
-// Test chat
-const API_KEY = "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";
-const businessName = new URLSearchParams(window.location.search).get('business') || 'your business';
-const SYSTEM = `You are a friendly AI assistant for ${businessName}. You were just set up through Staytim. For this test, answer general questions helpfully. Keep replies to 1-2 sentences.`;
-let msgs = [];
-let busy = false;
 
 function addMsg(role, text) {
   const c = document.getElementById('testChat');
@@ -207,31 +216,22 @@ async function sendTest() {
   addMsg('u', text);
   msgs.push({role:'user', content:text});
   busy = true;
-  if (API_KEY === 'YOUR_API_KEY_HERE') {
-    setTimeout(() => { addMsg('ai', 'This is a demo reply — your real AI would answer based on your actual business info!'); busy = false; }, 800);
-    return;
-  }
+
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
+    const r = await fetch(`${BACKEND}/demo/chat`, {
       method: 'POST',
-      headers: {'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body: JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:150,system:SYSTEM,messages:msgs.slice(-6)})
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text, history: msgs.slice(-6), business_name: businessName})
     });
     const data = await r.json();
-    if (data.content?.[0]) {
-      const reply = data.content[0].text;
-      msgs.push({role:'assistant', content:reply});
-      addMsg('ai', reply);
+    if (data.reply) {
+      msgs.push({role:'assistant', content:data.reply});
+      addMsg('ai', data.reply);
     }
-  } catch(e) { addMsg('ai', 'Something went wrong. Please try again.'); }
+  } catch(e) {
+    addMsg('ai', 'Something went wrong. Please try again.');
+  }
   busy = false;
-}
-
-// Set share URL from business name in URL params
-const biz = new URLSearchParams(window.location.search).get('business');
-if (biz) {
-  const slug = biz.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-  document.getElementById('shareUrl').textContent = `staytim.io/chat/${slug}`;
 }
 </script>
 </body>
