@@ -264,6 +264,14 @@ footer p{font-size:0.75rem;color:var(--text3)}
   .footer-inner{flex-direction:column;align-items:flex-start}
 }
 </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S55D1J1DDZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-S55D1J1DDZ");
+</script>
 </head>
 <body>
 
@@ -766,7 +774,7 @@ function toggleFaq(el){
 
 
 // Float chat
-const FLOAT_KEY="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";
+const FLOAT_BACKEND="https://staytim-production.up.railway.app";
 const FLOAT_SYS=`You are a friendly AI assistant for Bella Studio, a hair salon at 2840 Fillmore St, San Francisco. Hours: Mon-Sat 10am-7pm. Phone: (415) 555-0182. Services: Haircut $50-120, Balayage $150-300, Color $80-150, Keratin $200-400. Keep replies to 1-2 sentences. Always offer to help book.`;
 let fMsgs=[],fBusy=false,fOpen=false;
 function toggleFloat(){
